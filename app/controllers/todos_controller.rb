@@ -1,4 +1,5 @@
 class TodosController < ApplicationController
+  before_action :find_todo, only: [:show, :update]
 
   # GET /todos
   def index
@@ -6,15 +7,30 @@ class TodosController < ApplicationController
     json_response(@todos)
   end
 
+  # POST /todos
+  def create
+    @todo = Todo.create!(todo_params)
+    json_response(@todo, :created)
+  end
+
   # GET /todos/:id
   def show
-    @todo = Todo.find(params[:id])
     json_response(@todo)
+  end
+
+  # PUT /todos/:id
+  def update
+    @todo.update(todo_params)
+    head :no_content
   end
 
   private
 
   def todo_params
     params.permit(:title, :created_by)
+  end
+
+  def find_todo
+    @todo = Todo.find(params[:id])
   end
 end
