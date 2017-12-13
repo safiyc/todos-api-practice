@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
-    name "MyString"
+    name { Faker::Zelda.character }
     done false
-    todo nil
+    todo_id nil
   end
 end
