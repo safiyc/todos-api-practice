@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :find_todo, only: [:show, :update]
+  before_action :find_todo, only: [:show, :update, :destroy]
 
   # GET /todos
   def index
@@ -19,8 +19,15 @@ class TodosController < ApplicationController
   end
 
   # PUT /todos/:id
+  # 'head :no_content' creates a HTTP response 200 (success) with an empty body, returning: 'Status Code:200 OK'
   def update
     @todo.update(todo_params)
+    head :no_content
+  end
+
+  # DELETE /todos/:id
+  def destroy
+    @todo.destroy
     head :no_content
   end
 

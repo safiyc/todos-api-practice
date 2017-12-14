@@ -52,7 +52,7 @@ describe 'Todos API', :type => :request do
   end
 
   # test suite for POST /todos
-  describe 'Post /todos' do
+  describe 'POST /todos' do
     # valid payload
     let(:valid_attributes) { { title: 'Learn Elm', created_by: '1'} }
 
@@ -83,7 +83,7 @@ describe 'Todos API', :type => :request do
   end
 
   # test suite for PUT /todos/:id
-  describe 'Put /todos/:id' do
+  describe 'PUT /todos/:id' do
     let(:valid_attributes) { { title: 'Shopping' } }
 
     context 'when the record exists' do
@@ -96,6 +96,15 @@ describe 'Todos API', :type => :request do
       it 'returns status code 204' do
         expect(response).to have_http_status(204)
       end
+    end
+  end
+
+  # test suite for DELETE /todos/:id
+  describe 'DELETE /todos/:id' do
+    before { delete "/todos/#{todo_id}" }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
     end
   end
 end
