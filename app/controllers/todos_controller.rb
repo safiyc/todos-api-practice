@@ -4,6 +4,8 @@ class TodosController < ApplicationController
   # GET /todos
   def index
     @todos = Todo.all
+    title = params[:title]
+    @todos = Todo.search(title)
     json_response(@todos)
   end
 
